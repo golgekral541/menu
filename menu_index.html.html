@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5efe5">
+  <meta name="description" content="Lezzet Durağı dijital menüsü">
+  <title>Lezzet Durağı | Dijital Menü</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    :root {
+      --paper: #f5efe5;
+      --ink: #25231f;
+      --muted: #766f65;
+      --accent: #ca4b2c;
+      --accent-dark: #9f321d;
+      --line: #d9cdbd;
+      --card: #fffdf9;
+      --green: #426751;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+    }
+    .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    .hero {
+      min-height: 420px;
+      padding: 26px 0 58px;
+      background: linear-gradient(120deg, rgba(36, 27, 19, .82), rgba(36, 27, 19, .18)),
+        url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1800&q=85') center/cover;
+      color: #fffaf2;
+      display: flex;
+      flex-direction: column;
+    }
+    nav { display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-size: 1rem; font-weight: 700; letter-spacing: .12em; }
+    .nav-note { color: rgba(255, 250, 242, .75); font-size: .8rem; }
+    .hero-copy { margin-top: auto; max-width: 650px; }
+    .eyebrow { color: #f4b26e; font-size: .76rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+    h1, h2 { font-family: 'Playfair Display', Georgia, serif; }
+    h1 { font-size: clamp(3.3rem, 8vw, 6.5rem); line-height: .95; margin: 12px 0 20px; letter-spacing: -.04em; }
+    .hero-copy p { max-width: 450px; color: rgba(255, 250, 242, .82); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+    main { padding: 72px 0 54px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); margin: 0; line-height: 1; }
+    .section-heading p { color: var(--muted); margin: 0; max-width: 310px; text-align: right; line-height: 1.5; }
+    .menu-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+    .card { background: var(--card); border: 1px solid var(--line); overflow: hidden; display: grid; grid-template-columns: 190px 1fr; min-height: 190px; transition: transform .2s ease, box-shadow .2s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(67, 46, 25, .12); }
+    .card img { width: 100%; height: 100%; min-height: 190px; object-fit: cover; display: block; }
+    .card-content { padding: 22px 20px; display: flex; flex-direction: column; }
+    .card-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.35rem; line-height: 1.1; margin-bottom: 10px; }
+    .card-desc { color: var(--muted); font-size: .88rem; line-height: 1.5; }
+    .card-price { color: var(--accent-dark); font-size: 1.05rem; font-weight: 700; margin-top: auto; padding-top: 18px; }
+    .qr-section { margin-top: 72px; padding: 34px; background: var(--ink); color: #fffaf2; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .qr-copy { max-width: 560px; }
+    .qr-copy h2 { font-size: 2rem; margin-bottom: 12px; }
+    .qr-copy p { color: #c6beb2; line-height: 1.55; margin: 0; }
+    #qrcode { background: #fff; padding: 10px; line-height: 0; flex: 0 0 auto; }
+    #qrcode img, #qrcode canvas { display: block; }
+    footer { border-top: 1px solid var(--line); padding: 24px 0 32px; color: var(--muted); font-size: .8rem; display: flex; justify-content: space-between; gap: 16px; }
+    @media (max-width: 760px) {
+      .container { width: min(100% - 28px, 560px); }
+      .hero { min-height: 480px; padding-top: 20px; }
+      .nav-note { display: none; }
+      main { padding-top: 48px; }
+      .section-heading { display: block; }
+      .section-heading p { text-align: left; margin-top: 12px; }
+      .menu-grid { grid-template-columns: 1fr; gap: 16px; }
+      .card { grid-template-columns: 125px 1fr; min-height: 155px; }
+      .card img { min-height: 155px; }
+      .card-content { padding: 17px 15px; }
+      .card-title { font-size: 1.15rem; }
+      .card-desc { font-size: .8rem; }
+      .qr-section { margin-top: 48px; padding: 24px; display: block; }
+      #qrcode { width: max-content; margin: 24px auto 0; }
+      footer { display: block; }
+      footer span { display: block; margin-top: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <nav class="container" aria-label="Ana navigasyon">
+      <div class="brand">LEZZET DURAĞI</div>
+      <div class="nav-note">Taze hazırlanır · Mutlulukla servis edilir</div>
+    </nav>
+    <div class="hero-copy container">
+      <div class="eyebrow">Dijital menü</div>
+      <h1>Acıkmak için<br>güzel bir sebep.</h1>
+      <p>Sıcacık ekmek, özenle seçilmiş malzemeler ve her lokmada tanıdık bir lezzet.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="section-heading">
+      <h2>Bugünün favorileri</h2>
+      <p>Mutfağımızdan çıkan, günün her saatine eşlik eden doyurucu lezzetler.</p>
+    </div>
+
+    <section class="menu-grid" aria-label="Menü ürünleri">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=700&q=85" alt="Kavurmalı kaşarlı tost" loading="lazy">
+        <div class="card-content"><div class="card-title">Kavurmalı Kaşarlı Tost</div><div class="card-desc">Klasik tost ekmeğinde eritilmiş kaşar peyniri ve dana kavurma.</div><div class="card-price">180 TL</div></div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=700&q=85" alt="Patso ekmek" loading="lazy">
+        <div class="card-content"><div class="card-title">Patso Ekmek</div><div class="card-desc">Taze ekmek arasında çıtır patates kızartması, ketçap ve mayonez.</div><div class="card-price">110 TL</div></div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=85" alt="Ekmek arası et kavurma" loading="lazy">
+        <div class="card-content"><div class="card-title">Ekmek Arası Et Kavurma</div><div class="card-desc">Taze yarım ekmek arasında nefis et kavurma, domates, mor soğan ve biber.</div><div class="card-price">220 TL</div></div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=700&q=85" alt="Ekmek arası tavuk döner" loading="lazy">
+        <div class="card-content"><div class="card-title">Ekmek Arası Tavuk Döner</div><div class="card-desc">Özel baharatlı tavuk döner, patates kızartması ve yeşillikler ile.</div><div class="card-price">140 TL</div></div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1516684669134-de6f7c473a2a?auto=format&fit=crop&w=700&q=85" alt="Pilav üstü et kavurma" loading="lazy">
+        <div class="card-content"><div class="card-title">Pilav Üstü Et Kavurma</div><div class="card-desc">Tereyağlı pirinç pilavı üzerinde lezzetli et kavurma, garnitür ve turşu ile.</div><div class="card-price">250 TL</div></div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=700&q=85" alt="Pilav üstü tavuk döner" loading="lazy">
+        <div class="card-content"><div class="card-title">Pilav Üstü Tavuk Döner</div><div class="card-desc">Tereyağlı pirinç pilavı üzerinde tavuk döner, çoban salata ve turşu ile.</div><div class="card-price">170 TL</div></div>
+      </article>
+    </section>
+
+    <section class="qr-section" aria-labelledby="qr-title">
+      <div class="qr-copy"><h2 id="qr-title">Menüyü yanında taşı.</h2><p>Bu sayfayı telefonunuzda açmak için QR kodu taratmanız yeterli. Kod, sayfanın bulunduğu adresi otomatik olarak kullanır.</p></div>
+      <div id="qrcode" aria-label="Dijital menü QR kodu"></div>
+    </section>
+  </main>
+
+  <footer class="container"><strong>LEZZET DURAĞI</strong><span>© 2026 · Tüm hakları saklıdır.</span></footer>
+
+  <script>
+    new QRCode(document.getElementById('qrcode'), {
+      text: window.location.href,
+      width: 160,
+      height: 160,
+      colorDark: '#25231f',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  </script>
+</body>
+</html>
