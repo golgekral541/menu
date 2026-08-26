@@ -30,7 +30,7 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
@@ -72,10 +72,10 @@
       color: var(--gold);
     }
 
-    /* Menü Izgarası & Kartlar */
+    /* 3'lü Satır Izgarası */
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
 
@@ -95,7 +95,6 @@
       border-color: var(--gold);
     }
 
-    /* Resimlerin Kırpılmadan Tam Görünmesi İçin Ayarlar */
     .card-img-wrapper {
       width: 100%;
       background: #000000;
@@ -109,7 +108,7 @@
       width: 100%;
       height: auto;
       max-height: 280px;
-      object-fit: contain; /* Resmin tamamını kesilmeden gösterir */
+      object-fit: contain;
       display: block;
     }
 
@@ -130,7 +129,7 @@
     }
 
     .card-title {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: #ffffff;
     }
@@ -148,41 +147,41 @@
 
     .card-desc {
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       line-height: 1.4;
     }
 
-    /* QR Kod Alanı */
+    /* QR Kod Alanı (Menü Kartı Gibi Hizalı) */
     .qr-section {
-      margin-top: 36px;
-      padding: 20px 24px;
       background: linear-gradient(145deg, #181614, #0f0e0d);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 14px;
+      padding: 24px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      justify-content: center;
+      text-align: center;
+      gap: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     }
 
     .qr-text h2 {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--gold-light);
       margin-bottom: 6px;
     }
 
     .qr-text p {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
     }
 
     #qrcode {
       background: #ffffff;
-      padding: 8px;
-      border-radius: 10px;
-      flex-shrink: 0;
+      padding: 10px;
+      border-radius: 12px;
       line-height: 0;
     }
 
@@ -193,10 +192,10 @@
       font-size: 0.8rem;
     }
 
-    @media (max-width: 480px) {
-      .qr-section {
-        flex-direction: column;
-        text-align: center;
+    /* Tablet ve Mobilde Esnek Görünüm */
+    @media (max-width: 900px) {
+      .menu-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       }
     }
   </style>
@@ -213,7 +212,7 @@
     </header>
 
     <main class="menu-grid">
-      <!-- Ekmek Arası Et Kavurma -->
+      <!-- SATIR 1 - ÜRÜN 1 -->
       <article class="card">
         <div class="card-img-wrapper">
           <img src="et-kavurma-ekmek.jpg" alt="Ekmek Arası Et Kavurma">
@@ -227,7 +226,7 @@
         </div>
       </article>
 
-      <!-- Ekmek Arası Tavuk Döner -->
+      <!-- SATIR 1 - ÜRÜN 2 -->
       <article class="card">
         <div class="card-img-wrapper">
           <img src="tavuk-doner-ekmek.jpg" alt="Ekmek Arası Tavuk Döner">
@@ -241,7 +240,7 @@
         </div>
       </article>
 
-      <!-- Patso Ekmek -->
+      <!-- SATIR 1 - ÜRÜN 3 -->
       <article class="card">
         <div class="card-img-wrapper">
           <img src="patso.jpg" alt="Patso Ekmek">
@@ -255,7 +254,7 @@
         </div>
       </article>
 
-      <!-- Pilav Üstü Et Kavurma -->
+      <!-- SATIR 2 - ÜRÜN 4 -->
       <article class="card">
         <div class="card-img-wrapper">
           <img src="pilav-usti-kavurma.jpg" alt="Pilav Üstü Et Kavurma">
@@ -269,7 +268,7 @@
         </div>
       </article>
 
-      <!-- Pilav Üstü Tavuk Döner -->
+      <!-- SATIR 2 - ÜRÜN 5 -->
       <article class="card">
         <div class="card-img-wrapper">
           <img src="pilav-usti-doner.jpg" alt="Pilav Üstü Tavuk Döner">
@@ -282,15 +281,16 @@
           <p class="card-desc">Tereyağlı pirinç pilavı üzerinde tavuk döner, çoban salata ve turşu ile.</p>
         </div>
       </article>
-    </main>
 
-    <section class="qr-section">
-      <div class="qr-text">
-        <h2>Menü için QR kodu okutunuz</h2>
-        <p>Mobil cihazınızla taratarak dijital menümüzü anında açabilirsiniz.</p>
-      </div>
-      <div id="qrcode"></div>
-    </section>
+      <!-- SATIR 2 - QR KOD KUTUSU -->
+      <section class="qr-section">
+        <div id="qrcode"></div>
+        <div class="qr-text">
+          <h2>Menü için QR kodu okutunuz</h2>
+          <p>Mobil cihazınızla taratarak dijital menümüzü anında açabilirsiniz.</p>
+        </div>
+      </section>
+    </main>
 
     <footer>
       © 2026 Meteler Büfe · Tüm Hakları Saklıdır.
@@ -300,8 +300,8 @@
   <script>
     new QRCode(document.getElementById('qrcode'), {
       text: window.location.href,
-      width: 75,
-      height: 75,
+      width: 110,
+      height: 110,
       colorDark: '#121110',
       colorLight: '#ffffff',
       correctLevel: QRCode.CorrectLevel.H
